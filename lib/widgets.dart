@@ -16,7 +16,7 @@ class _TitulosState extends State<Titulos> {
       widget.texto,
       textAlign: TextAlign.center,
       style: const TextStyle(
-        color: Colors.white,
+        color: Colors.black,
         fontSize: 30,
         fontStyle: FontStyle.italic,
       ),

@@ -18,5 +18,9 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  
+  assets:
+    - assets/saludo-vulcano.gif
+    - assets/carne-de-identidad.png
 
 

@@ -31,26 +31,51 @@ class _Inicio extends State<Inicio>{
 
   Widget build(BuildContext context){
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: Colors.white,
       body: Center(
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 150),
+            padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 100),
             child: Container(
               child: Column(children: [
+
+                Image.asset(
+                  'assets/saludo-vulcano.gif', // Ruta de la imagen en los recursos
+                  fit: BoxFit.cover, // Ajuste de la imagen
+                  width: 200, // Ancho de la imagen
+                  height: 200, // Alto de la imagen
+                ),
+
+                const SizedBox(height: 50),
+
                 Titulos('Bienvenido ' + nombre),
 
-                const SizedBox(height: 40),
+                const SizedBox(height: 20),
 
-                 TextButton(onPressed:(){ 
+                 TextButton(onPressed:(){
+
                   }, 
                     style: ElevatedButton.styleFrom(
                       padding: EdgeInsets.all(20.0), // Ajusta el relleno del botón
                       minimumSize: Size(200.0, 60.0),
-                      backgroundColor: Colors.white,
-                       foregroundColor: Colors.black,
+                      backgroundColor: Colors.black,
+                       foregroundColor: Colors.white,
                        // Tamaño mínimo del botón
                     ),
                       child: const Text('Jugar')
+                  ),
+
+                  const SizedBox(height: 40),
+
+                  TextButton(onPressed:(){
+                  }, 
+                    style: ElevatedButton.styleFrom(
+                      padding: EdgeInsets.all(20.0), // Ajusta el relleno del botón
+                      minimumSize: Size(200.0, 60.0),
+                      backgroundColor: Colors.black,
+                       foregroundColor: Colors.white,
+                       // Tamaño mínimo del botón
+                    ),
+                      child: const Text('Puntuación')
                   )
               ],
               ),
