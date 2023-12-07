@@ -4,7 +4,7 @@ class NombreHandler {
   static Future<void> guardarNombre(String nombre) async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setString('nombre_guardado', nombre);
-    print('Texto guardado en SharedPreferences.');
+    print('Nombre guardado');
   }
 
   static Future<String> obtenerNombreGuardado() async {

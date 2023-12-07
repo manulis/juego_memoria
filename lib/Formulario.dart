@@ -22,7 +22,19 @@ class Formulario extends StatefulWidget{
 
 class _Formulario extends State<Formulario>{
 
- 
+ Future<void> _obtenerNombreGuardado() async {
+    final nombreGuardado = await NombreHandler.obtenerNombreGuardado();
+    if (nombreGuardado.isNotEmpty){
+      print("No Vacio");
+      // ignore: use_build_context_synchronously
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) =>  Inicio(title: 'Inicio')),
+      );
+    }else{
+      print("No vacio");
+    }
+  }
 
   @override
   Widget build(BuildContext context){
@@ -33,14 +45,12 @@ class _Formulario extends State<Formulario>{
             padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 50),
             child: Container(
               child: Column(children: [
-
                 Image.asset(
-                  'assets/carne-de-identidad.png', // Ruta de la imagen en los recursos
-                  fit: BoxFit.cover, // Ajuste de la imagen
-                  width: 200, // Ancho de la imagen
-                  height: 200, // Alto de la imagen
+                  'assets/carne-de-identidad.png', 
+                  fit: BoxFit.cover, 
+                  width: 100, 
+                  height: 100, 
                 ),
-
                 const SizedBox(height: 20),
                 const Titulos("Meta un nombre"),
                 const SizedBox(height: 20),
@@ -66,11 +76,13 @@ class _Formulario extends State<Formulario>{
                       MaterialPageRoute(builder: (context) => Inicio(title: 'Inicio',)),
                     );
                   } ,   
-                    style: ButtonStyle(
-                      foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
-                    
-                    backgroundColor: 
-                      MaterialStateProperty.all<Color>(Colors.black), // Cambia el color de fondo aquí
+                    style: ElevatedButton.styleFrom(
+                      padding: EdgeInsets.all(20.0),
+                      minimumSize: Size(200.0, 60.0),
+                      backgroundColor: Colors.black,
+                      foregroundColor: Colors.white,
+                      shadowColor: const Color.fromARGB(255, 121, 120, 120).withOpacity(1),
+                      elevation: 5,
                     ), 
                     child: const Text('Aceptar')
                   ),
