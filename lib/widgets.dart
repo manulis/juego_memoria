@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-
-
 //Formato de los Titulos
 
 class Titulos extends StatefulWidget {

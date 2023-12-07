@@ -1,4 +1,3 @@
-
 class Usuario{
 String nombre;
 int puntuacion;

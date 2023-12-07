@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:juego_memoria/widgetsPrincipales.dart';
-
+import 'package:juego_memoria/Inicio.dart';
+import 'package:juego_memoria/utils.dart';
+import 'package:juego_memoria/Formulario.dart';
 
 void main() {
   runApp(const MainApp());
@@ -8,19 +9,12 @@ void main() {
 
 class MainApp extends StatelessWidget {
 
-
-
   const MainApp({super.key});
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
       title: 'Formulario',
-      home: 
-
-      
-      
-      Formulario(title: 'Formulario'),
-
+      home: Formulario(title: 'Formulario'),
     );
   }
 }
