@@ -22,3 +22,17 @@ class _TitulosState extends State<Titulos> {
     );
   }
 }
+
+//Botones 1
+Widget buildButton(String text, VoidCallback onPressed) {
+  return TextButton(
+    onPressed: onPressed,
+    style: ElevatedButton.styleFrom(
+      padding: const EdgeInsets.all(20.0),
+      minimumSize: const Size(200.0, 60.0),
+      backgroundColor: Colors.black,
+      foregroundColor: Colors.white,
+    ),
+    child: Text(text),
+  );
+}
