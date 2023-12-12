@@ -46,14 +46,14 @@ class _Inicio extends State<Inicio>{
               Titulos('Bienvenido ' + nombre),
               const SizedBox(height: 20),
             
-              buildButton("Jugar", () { 
+              buildButton('Jugar', () { 
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => Juego()),
                 );
               }),
               const SizedBox(height: 40),
-              buildButton("Puntuación", () {
+              buildButton('Puntuación', () {
                 
             
             

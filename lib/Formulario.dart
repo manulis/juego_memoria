@@ -14,8 +14,6 @@ Future<void> _guardarNombre(String nombre) async{
 }
 
 class Formulario extends StatefulWidget{
-  const Formulario({super.key, required this.title});
-  final String title;
   @override
   State<Formulario> createState() => _Formulario();
 }
@@ -32,7 +30,6 @@ class _Formulario extends State<Formulario>{
     final nombreGuardado = await NombreHandler.obtenerNombreGuardado();
     if (nombreGuardado.isNotEmpty){
       print("No Vacio");
-
       // ignore: use_build_context_synchronously
       Navigator.push(
         context,
@@ -74,7 +71,7 @@ class _Formulario extends State<Formulario>{
               ),
               const SizedBox(height: 30),
               if (nombreUsu.isNotEmpty)
-                buildButton("Aceptar", () { 
+                buildButton('Aceptar', () { 
                   print(nombreUsu);
                   NombreHandler.guardarNombre(nombreUsu); 
                   Navigator.push(
@@ -88,5 +85,3 @@ class _Formulario extends State<Formulario>{
     );
   }
 }
-
-
