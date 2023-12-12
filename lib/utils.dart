@@ -38,7 +38,6 @@ Future<void> obtenerImagenes() async {
       } else {
         print('Fallo la solicitud con código de estado: ${response.statusCode}');
         print('Reintentando');
-        break;
       }
     } 
   }
