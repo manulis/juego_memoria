@@ -24,7 +24,6 @@ List images = [];
 List imagesCorrectas = [];
 
 //Obtener imagenes de la Api
-
 Future<void> obtenerImagenes() async {
   for (var i = 0; i < 10; i++) {
     while (true) {
@@ -43,9 +42,19 @@ Future<void> obtenerImagenes() async {
   }
 
   for (var i = 0; i < 5; i++) {
-    imagesCorrectas.add(images[i]);
+    var random = new Random();
+    imagesCorrectas.add(images[random.nextInt(11)]);
   }
 
+}
+
+comprobarImagen(image){
+  for(var imageCorrecta in imagesCorrectas){
+    if(image == imageCorrecta){
+      return true;
+    }
+  }
+  return false;
 }
 
 

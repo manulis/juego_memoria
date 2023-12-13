@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:juego_memoria/Inicio.dart';
+import 'package:juego_memoria/Juego.dart';
 import 'package:juego_memoria/utils.dart';
 import 'package:juego_memoria/Formulario.dart';
 
