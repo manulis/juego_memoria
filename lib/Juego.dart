@@ -17,21 +17,26 @@ class _JuegoState extends State<Juego> {
   bool _buttonVisible = true;
   bool _loading = false;
 
-@override
-void initState() {
-  super.initState();
-  _timer = Timer.periodic(const Duration(seconds: 1), (_) {
-      if(_buttonVisible == false){
+  @override
+  void initState() {
+    super.initState();
+    _startTimer();
+  }
+
+  void _startTimer() {
+    _timer = Timer.periodic(const Duration(seconds: 2), (_) {
+      if (!_buttonVisible) {
         setState(() => _index++);
-        if(_index==5){
+        if (_index == imagesCorrectas.length) {
           setState(() {
-            _buttonVisible=true;
+            _buttonVisible = true;
             _EmpezarButtonEnabled = false;
           });
+          _timer.cancel();
         }
       }
-  }); 
-}
+    });
+  }
 
   @override
   void dispose() {
@@ -43,25 +48,23 @@ void initState() {
     print("Empezar");
     setState(() => _loading = true);
 
-    await obtenerImagenes();
+    await obtenerImagenes(); // Lógica para obtener las imágenes
 
     setState(() {
       _loading = false;
       _buttonVisible = false;
     });
-
-
   }
 
   Widget _buildButton() {
     return _EmpezarButtonEnabled
         ? buildButton2('Empezar', () => _handleStartButton())
         : buildButton2('Resolver', () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => Resolucion()),
-          );
-        });
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => Resolucion()),
+            );
+          });
   }
 
   @override
@@ -72,24 +75,21 @@ void initState() {
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 200),
           child: Column(
-            
             children: [
-              if (_buttonVisible)
-                _loading
-                    ? Container(child: LoadingSpinner())
-                    : _buildButton()
+              if (_loading)
+                Container(child: CircularProgressIndicator())
               else
-                Container(
-                  child: AnimatedSwitcher(
-                    duration: const Duration(milliseconds: 800),
-                    child: 
-                    Image.network(
-                      imagesCorrectas[_index % imagesCorrectas.length],
-                      fit: BoxFit.cover,
-                      width: 300,
-                      height: 300,
-                    ),
-                  ),
+                AnimatedSwitcher(
+                  duration: const Duration(milliseconds: 800),
+                  child: _buttonVisible
+                      ? _buildButton()
+                      : Image.network(
+                          obtenerImagenActual(),
+                          fit: BoxFit.cover,
+                          width: 300,
+                          height: 300,
+                          key: UniqueKey(),
+                        ),
                 ),
             ],
           ),
@@ -97,7 +97,12 @@ void initState() {
       ),
     );
   }
+
+  String obtenerImagenActual() {
+    return imagesCorrectas[_index % imagesCorrectas.length];
+  }
 }
+
 
 class Resolucion extends StatefulWidget{
   State<Resolucion> createState() => _Resolucion();
@@ -135,7 +140,6 @@ class _Resolucion extends State<Resolucion>{
                                   children: [ 
                                     Image.asset('assets/premio.gif',fit: BoxFit.cover,width: 100,height: 100), 
                                     Text("Genial!!! acertastes todas y tuviste ${fallos} fallos "),
-                                    
                                   ],
                                 ),
 
@@ -143,17 +147,22 @@ class _Resolucion extends State<Resolucion>{
                                    Column(
                                       children: [
                                         Image.asset('assets/perder.gif',fit: BoxFit.cover,width: 100,height: 100),
-                                        Text("No has acertado ni una")
-
+                                        Text("No has acertado ni una"),
                                     ],
                                   ),
 
-                                const SizedBox(height: 50),
+                                if(fallos==3 && aciertos!=5 || fallos!=3 && aciertos==5 || fallos!=3 && aciertos!=5)
+                                  Text("Has tenido ${fallos} fallos y ${aciertos} aciertos"),
+
+                              const SizedBox(height: 50),
                               buildButton("Enviar Puntuación", () async { 
                                 String nombre = await NombreHandler.obtenerNombreGuardado();
                                 Usuario usuario = Usuario(nombre, Puntuacion);
+                                print("${fallos} y ${aciertos}");
+                                print("${usuario.nombre} tiene de puntuación: ${usuario.puntuacion} ");
+                                PuntuacioHandler.enviarPuntuacion(usuario.nombre, usuario.puntuacion);
                               }),
-                              const SizedBox(height: 50),
+                              const SizedBox(height: 30),
                               buildButton("Salir", () { 
                                 Puntuacion = 0;
                                 aciertos = 0;

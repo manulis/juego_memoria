@@ -3,9 +3,10 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'dart:math';
+import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:juego_memoria/main.dart';
 
 
-//Gruardar y extraer el nomnre de la memoria del disposiyivo
 class NombreHandler {
   static Future<void> guardarNombre(String nombre) async {
     final prefs = await SharedPreferences.getInstance();
@@ -23,15 +24,14 @@ class NombreHandler {
 List images = [];
 List imagesCorrectas = [];
 
-//Obtener imagenes de la Api
 Future<void> obtenerImagenes() async {
   for (var i = 0; i < 10; i++) {
     while (true) {
-      final response = await http.get(Uri.parse("https://dog.ceo/api/breeds/image/random")); 
+      final response = await http.get(Uri.parse("https://random.imagecdn.app/v1/image?width=500&height=500&category=buildings&format=json")); 
       if (response.statusCode == 200) {
         final jsonData = json.decode(response.body);
         print(jsonData);
-        images.add(jsonData['message']);
+        images.add(jsonData['url']);
         print(images[i]);
         break;
       } else {
@@ -41,9 +41,15 @@ Future<void> obtenerImagenes() async {
     } 
   }
 
-  for (var i = 0; i < 5; i++) {
-    var random = new Random();
-    imagesCorrectas.add(images[random.nextInt(11)]);
+  List<int> indexes = [];
+  Random random = Random();
+
+  while(imagesCorrectas.length<5) {
+    int randomIndex = random.nextInt(images.length);
+    if (!indexes.contains(randomIndex)) {
+      indexes.add(randomIndex);
+      imagesCorrectas.add(images[randomIndex]);
+    }
   }
 
 }
@@ -57,12 +63,19 @@ comprobarImagen(image){
   return false;
 }
 
+class PuntuacioHandler {
+
+  static Future<void> enviarPuntuacion(nombre, puntuacion) async{
+
+    await supabase.from('Puntuaciones').insert({'nombre': nombre, 'puntuacion': puntuacion});
+    
+  }
+
+  static Future<void> obtenerPuntuacion(nombre) async {
+
+    
 
 
+  }
 
-
-
-
-
-
-
+}
