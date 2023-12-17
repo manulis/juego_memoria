@@ -1,8 +1,7 @@
 class Usuario{
-String nombre;
-int puntuacion;
+  String nombre;
+  int puntuacion;
 
-Usuario(this.nombre, this.puntuacion);
-
+  Usuario(this.nombre, this.puntuacion);
 
 }

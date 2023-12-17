@@ -160,7 +160,7 @@ class _Resolucion extends State<Resolucion>{
                                 Usuario usuario = Usuario(nombre, Puntuacion);
                                 print("${fallos} y ${aciertos}");
                                 print("${usuario.nombre} tiene de puntuación: ${usuario.puntuacion} ");
-                                PuntuacioHandler.enviarPuntuacion(usuario.nombre, usuario.puntuacion);
+                                await PuntuacioHandler.enviarPuntuacion(usuario.nombre, usuario.puntuacion);
                               }),
                               const SizedBox(height: 30),
                               buildButton("Salir", () { 
