@@ -24,6 +24,31 @@ class _TitulosState extends State<Titulos> {
   }
 }
 
+
+class TextoListas extends StatefulWidget{
+  final String texto;
+  const TextoListas(this.texto);
+  _TextoListas createState() => _TextoListas();
+}
+
+class _TextoListas extends State<TextoListas>{
+
+  Widget build(BuildContext context){
+    return Text(
+
+      widget.texto,
+      textAlign: TextAlign.center,
+        style: const TextStyle(
+        
+        fontSize: 20,
+       
+      ),
+
+    );
+  }
+
+}
+
 //Boton 1
 Widget buildButton(String text, VoidCallback onPressed) {
   return TextButton(

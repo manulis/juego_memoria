@@ -51,7 +51,6 @@ Future<void> obtenerImagenes() async {
       imagesCorrectas.add(images[randomIndex]);
     }
   }
-
 }
 
 comprobarImagen(image){
@@ -84,7 +83,7 @@ class PuntuacioHandler {
     }
   }
 
-  static Future<List> obtenerPuntuacion() async {
+  static Future<List<Map<String, dynamic>>> obtenerPuntuacion() async {
     try{
      final data =  await supabase.from("Puntuaciones").select('*');
      return data;

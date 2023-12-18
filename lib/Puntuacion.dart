@@ -7,48 +7,52 @@ class Puntuaciones extends StatefulWidget{
   State<Puntuaciones> createState() => _Puntuaciones();
 }
 
+class _Puntuaciones extends State<Puntuaciones> {
 
+  Future<List<Map<String, dynamic>>> obtenerPuntuacion() async {
+    return await PuntuacioHandler.obtenerPuntuacion();
+  }
 
-
-class _Puntuaciones extends State<Puntuaciones>{
- 
-
-  Widget build(BuildContext context){
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
-        body: CustomScrollView(
-          slivers: <Widget>[
-              SliverAppBar(
-                title: Titulos("Puntuaciones"),
-                pinned: true,
-                automaticallyImplyLeading: true, 
-                centerTitle: true,
-              ),
-
-          
-          ]
-        ),
+      body: FutureBuilder<List<Map<String, dynamic>>>(
+        future: obtenerPuntuacion(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return Center(child: CircularProgressIndicator());
+          } else if (snapshot.hasError) {
+            return Center(child: Text('Error al obtener datos'));
+          } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+            return Center(child: Text('No hay datos disponibles'));
+          } else {
+            return CustomScrollView(
+              slivers: <Widget>[
+                const SliverAppBar(
+                  title: Text("Puntuaciones"),
+                  pinned: true,
+                  automaticallyImplyLeading: true,
+                   backgroundColor: Colors.amber,
+                  centerTitle: true,
+                ),
+                SliverList(
+                  delegate: SliverChildBuilderDelegate(
+                    (BuildContext context, int index) {
+                      final puntuacion = snapshot.data![index];
+                      return InkWell(
+                        child: ListTile(
+                          title: TextoListas('${puntuacion['nombre']}: ${puntuacion['puntuacion']} puntos'),
+                        ),
+                      );
+                    },
+                    childCount: snapshot.data!.length,
+                  ),
+                ),
+              ],
+            );
+          }
+        },
+      ),
     );
   }
-}
-
-ListView milista() {
-  return ListView(
-    children: <Widget>[
-      
-      ListTile(
-     
-        title: Text('Primero'),
-       
-        subtitle: Text('Este es el primer Tile'),
-        
-        leading: Icon(Icons.add),
-       
-        onTap: () {},
-      ),
-      ListTile(
-        title: Text('Primero'),
-        onTap: () {},
-      )
-    ],
-  );
 }

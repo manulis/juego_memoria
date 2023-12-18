@@ -195,12 +195,12 @@ class _Resolucion extends State<Resolucion>{
                                         if(comprobarImagen(images[i])){
                                           setState(() {
                                             aciertos++;
-                                            Puntuacion ++;
+                                            Puntuacion+=3;
                                           });
                                         } else {
                                           setState(() {
                                             fallos++;
-                                            Puntuacion--;
+                                            Puntuacion-=3;
                                           });
                                         }
                                       }
