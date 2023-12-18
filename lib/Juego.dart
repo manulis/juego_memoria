@@ -112,6 +112,10 @@ int Puntuacion = 0;
 int fallos = 0;
 int aciertos = 0;
 class _Resolucion extends State<Resolucion>{
+
+  deleteimage(int i){
+    return images[i] = '';
+  }
   Widget build(BuildContext context){
     return Scaffold(
       body: CustomScrollView(
@@ -187,17 +191,20 @@ class _Resolucion extends State<Resolucion>{
                                   InkWell(
                                     onTap: () {
                                       print(images[i]);
-                                      if(comprobarImagen(images[i])){
-                                        setState(() {
-                                          aciertos++;
-                                          Puntuacion ++;
-                                        });
-                                      } else {
-                                        setState(() {
-                                          fallos++;
-                                          Puntuacion--;
-                                        });
+                                      if(images[i] != ''){
+                                        if(comprobarImagen(images[i])){
+                                          setState(() {
+                                            aciertos++;
+                                            Puntuacion ++;
+                                          });
+                                        } else {
+                                          setState(() {
+                                            fallos++;
+                                            Puntuacion--;
+                                          });
+                                        }
                                       }
+                                      deleteimage(i);
                                     },
                                     splashColor: Colors.white10,
                                     child: Ink.image(
