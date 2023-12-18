@@ -3,6 +3,7 @@ import 'package:juego_memoria/Juego.dart';
 import 'package:juego_memoria/utils.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:juego_memoria/widgets.dart';
+import 'package:juego_memoria/Puntuacion.dart';
 
 
 //PantallainicioJuego
@@ -54,9 +55,9 @@ class _Inicio extends State<Inicio>{
               }),
               const SizedBox(height: 40),
               buildButton('Puntuación', () {
-                
-            
-            
+                 Navigator.push(context, 
+                  MaterialPageRoute(builder: (context) => Puntuaciones())
+                 );
               })
             ],
             ),

@@ -66,8 +66,7 @@ comprobarImagen(image){
 class PuntuacioHandler {
 
   static Future<void> enviarPuntuacion(nombre, puntuacion) async{
-    final data = await supabase .from('Puntuaciones').select('*').eq('nombre', nombre);
-    print(data.isEmpty);
+    final data = await supabase.from('Puntuaciones').select('*').eq('nombre', nombre);
     if(data.isEmpty){
       try{
         await supabase.from('Puntuaciones').insert({'nombre': nombre, 'puntuacion': puntuacion});     
@@ -85,12 +84,14 @@ class PuntuacioHandler {
     }
   }
 
-  static Future<void> obtenerPuntuacion(nombre) async {
-
-
-    
-
-
+  static Future<List> obtenerPuntuacion() async {
+    try{
+     final data =  await supabase.from("Puntuaciones").select('*');
+     return data;
+    }on Exception catch (e){
+      print("Error: ${e}");
+      return [];
+    }
   }
 
 }
