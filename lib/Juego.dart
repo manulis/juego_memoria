@@ -5,6 +5,8 @@ import 'package:juego_memoria/usuario.dart';
 import 'package:juego_memoria/utils.dart';
 import 'package:juego_memoria/widgets.dart';
 
+
+//Pantalla Juego
 class Juego extends StatefulWidget {
   @override
   State<Juego> createState() => _JuegoState();
@@ -48,7 +50,7 @@ class _JuegoState extends State<Juego> {
     print("Empezar");
     setState(() => _loading = true);
 
-    await obtenerImagenes(); // Lógica para obtener las imágenes
+    await obtenerImagenes();
 
     setState(() {
       _loading = false;
@@ -103,7 +105,7 @@ class _JuegoState extends State<Juego> {
   }
 }
 
-
+//Pantalla Resolucion del juego
 class Resolucion extends StatefulWidget{
   State<Resolucion> createState() => _Resolucion();
 }
@@ -123,6 +125,7 @@ class _Resolucion extends State<Resolucion>{
           SliverAppBar(
             title: Titulos("Puntuacion: ${Puntuacion}"),
             pinned: true,
+            backgroundColor: Colors.amber, 
             automaticallyImplyLeading: false, 
             centerTitle: true,
              
@@ -162,9 +165,7 @@ class _Resolucion extends State<Resolucion>{
                               buildButton("Enviar Puntuación", () async { 
                                 String nombre = await NombreHandler.obtenerNombreGuardado();
                                 Usuario usuario = Usuario(nombre, Puntuacion);
-                                print("${fallos} y ${aciertos}");
-                                print("${usuario.nombre} tiene de puntuación: ${usuario.puntuacion} ");
-                                await PuntuacioHandler.enviarPuntuacion(usuario.nombre, usuario.puntuacion);
+                                await PuntuacionHandler.enviarPuntuacion(usuario.nombre, usuario.puntuacion);
                               }),
                               const SizedBox(height: 30),
                               buildButton("Salir", () { 
@@ -214,7 +215,6 @@ class _Resolucion extends State<Resolucion>{
                                       image: NetworkImage(images[i])
                                     ),
                                   )
-                                  
                               ],
                             ),
                           )  

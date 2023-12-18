@@ -7,24 +7,29 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:juego_memoria/main.dart';
 
 
+// Manejo del nombre del jugador
 class NombreHandler {
+  // Guardar el nombre del jugador en SharedPreferences
   static Future<void> guardarNombre(String nombre) async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setString('nombre_guardado', nombre);
     print('Nombre guardado');
   }
-
+   // Obtener el nombre guardado desde SharedPreferences
   static Future<String> obtenerNombreGuardado() async {
     final prefs = await SharedPreferences.getInstance();
     return prefs.getString('nombre_guardado') ?? '';
   }
 }
 
-
+// Listas para almacenar imágenes
 List images = [];
 List imagesCorrectas = [];
 
+
 Future<void> obtenerImagenes() async {
+
+  //Obtención y guardado de las imagenes de la API
   for (var i = 0; i < 10; i++) {
     while (true) {
       final response = await http.get(Uri.parse("https://random.imagecdn.app/v1/image?width=500&height=500&category=buildings&format=json")); 
@@ -41,8 +46,11 @@ Future<void> obtenerImagenes() async {
     } 
   }
 
+
+  // Seleccion aleatoria de imágenes correctas
   List<int> indexes = [];
   Random random = Random();
+
 
   while(imagesCorrectas.length<5) {
     int randomIndex = random.nextInt(images.length);
@@ -53,6 +61,7 @@ Future<void> obtenerImagenes() async {
   }
 }
 
+// Función para verificar si una imagen es correcta
 comprobarImagen(image){
   for(var imageCorrecta in imagesCorrectas){
     if(image == imageCorrecta){
@@ -62,7 +71,9 @@ comprobarImagen(image){
   return false;
 }
 
-class PuntuacioHandler {
+// Manejo de puntuaciones en la base de datos Supabase
+class PuntuacionHandler {
+  // Enviar o actualizar la puntuación del jugador
   static Future<void> enviarPuntuacion(nombre, puntuacion) async{
     final data = await supabase.from('Puntuaciones').select('*').eq('nombre', nombre);
     if(data.isEmpty){
@@ -79,7 +90,7 @@ class PuntuacioHandler {
       }
     }
   }
-
+  //Obtener todas las puntuaciones de la base de datos
   static Future<List<Map<String, dynamic>>> obtenerPuntuacion() async {
     try{
      final data =  await supabase.from("Puntuaciones").select('*');

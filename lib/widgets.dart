@@ -25,6 +25,7 @@ class _TitulosState extends State<Titulos> {
 }
 
 
+//Formato del texto en las listas
 class TextoListas extends StatefulWidget{
   final String texto;
   const TextoListas(this.texto);
@@ -32,28 +33,21 @@ class TextoListas extends StatefulWidget{
 }
 
 class _TextoListas extends State<TextoListas>{
-
   Widget build(BuildContext context){
     return Text(
-
       widget.texto,
       textAlign: TextAlign.center,
         style: const TextStyle(
-        
         fontSize: 20,
-       
       ),
-
     );
   }
-
 }
 
 //Boton 1
 Widget buildButton(String text, VoidCallback onPressed) {
   return TextButton(
     onPressed: onPressed,
-    
     style: ElevatedButton.styleFrom(
       padding: const EdgeInsets.all(20.0),
       minimumSize: const Size(200.0, 60.0),
@@ -76,5 +70,4 @@ Widget buildButton2(String text, VoidCallback onPressed){
     ),
     child: Text(text)
   );
-
 }

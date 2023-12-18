@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:juego_memoria/utils.dart';
 import 'package:juego_memoria/widgets.dart';
 
+
+//Pantalla Puntuaciones
 class Puntuaciones extends StatefulWidget{
   @override
   State<Puntuaciones> createState() => _Puntuaciones();
@@ -10,10 +12,10 @@ class Puntuaciones extends StatefulWidget{
 class _Puntuaciones extends State<Puntuaciones> {
 
   Future<List<Map<String, dynamic>>> obtenerPuntuacion() async {
-    return await PuntuacioHandler.obtenerPuntuacion();
+    return await PuntuacionHandler.obtenerPuntuacion();
   }
 
-  @override
+@override
 Widget build(BuildContext context) {
   return Scaffold(
     body: FutureBuilder<List<Map<String, dynamic>>>(

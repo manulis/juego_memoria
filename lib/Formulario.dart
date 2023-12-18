@@ -4,15 +4,10 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:juego_memoria/widgets.dart';
 import 'package:juego_memoria/Inicio.dart';
 
-//Formulario
+
 String nombreUsu = "";
 
-Future<void> _guardarNombre(String nombre) async{
-  final prefs = await SharedPreferences.getInstance();
-  await prefs.setString('nombre_guardado', nombre);
-  print('Texto guardado en SharedPreferences.');
-}
-
+//Pantalla formulario
 class Formulario extends StatefulWidget{
   @override
   State<Formulario> createState() => _Formulario();

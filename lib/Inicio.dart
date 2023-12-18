@@ -6,8 +6,8 @@ import 'package:juego_memoria/widgets.dart';
 import 'package:juego_memoria/Puntuacion.dart';
 
 
-//PantallainicioJuego
 
+//Pantalla Inicio
 class Inicio extends StatefulWidget{
  @override
   State<Inicio> createState() => _Inicio();
