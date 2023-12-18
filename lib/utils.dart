@@ -68,7 +68,7 @@ class PuntuacioHandler {
   static Future<void> enviarPuntuacion(nombre, puntuacion) async{
     final data = await supabase .from('Puntuaciones').select('*').eq('nombre', nombre);
     print(data.isEmpty);
-    if(data.isEmpty == true){
+    if(data.isEmpty){
       try{
         await supabase.from('Puntuaciones').insert({'nombre': nombre, 'puntuacion': puntuacion});     
       }on Exception catch(e){
@@ -87,7 +87,7 @@ class PuntuacioHandler {
 
   static Future<void> obtenerPuntuacion(nombre) async {
 
-    
+
     
 
 
