@@ -30,39 +30,53 @@ class _Inicio extends State<Inicio>{
     });
   }
 
-  Widget build(BuildContext context){
-    return Scaffold(
-      backgroundColor: Colors.white,
-      body: Center(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 100),
-            child: Column(children: [
-              Image.asset(
-                'assets/saludo-vulcano.gif', 
-                fit: BoxFit.cover, 
-                width: 200, 
-                height: 200, 
+  @override
+  Widget build(BuildContext context) {
+  return Scaffold(
+    backgroundColor: Colors.white,
+    body: CustomScrollView(
+      slivers: <Widget>[
+       const SliverAppBar(
+          backgroundColor: Colors.amber, 
+          title: Titulos('Inicio'),
+          centerTitle: true,
+          automaticallyImplyLeading: true,
+        ),
+        SliverToBoxAdapter(
+          child: Center(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 100),
+              child: Column(
+                children: [
+                  Image.asset(
+                    'assets/saludo-vulcano.gif',
+                    fit: BoxFit.cover,
+                    width: 200,
+                    height: 200,
+                  ),
+                  const SizedBox(height: 50),
+                  Titulos('Bienvenido ' + nombre),
+                  const SizedBox(height: 20),
+                  buildButton('Jugar', () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => Juego()),
+                    );
+                  }),
+                  const SizedBox(height: 40),
+                  buildButton('Puntuación', () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => Puntuaciones()),
+                    );
+                  }),
+                ],
               ),
-              const SizedBox(height: 50),
-              Titulos('Bienvenido ' + nombre),
-              const SizedBox(height: 20),
-            
-              buildButton('Jugar', () { 
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => Juego()),
-                );
-              }),
-              const SizedBox(height: 40),
-              buildButton('Puntuación', () {
-                 Navigator.push(context, 
-                  MaterialPageRoute(builder: (context) => Puntuaciones())
-                 );
-              })
-            ],
             ),
-            ),
-      ),
-    );
-  }
+          ),
+        ),
+      ],
+    ),
+  );
+}
 }

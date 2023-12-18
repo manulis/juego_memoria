@@ -69,7 +69,7 @@ Widget buildButton2(String text, VoidCallback onPressed){
   return TextButton(
     onPressed: onPressed, 
     style: ElevatedButton.styleFrom(
-      padding: const EdgeInsets.all(20.0),
+      padding: const EdgeInsets.all(30.0),
       minimumSize: const Size(200.0, 200.0),
       backgroundColor: Colors.black,
       foregroundColor: Colors.white,

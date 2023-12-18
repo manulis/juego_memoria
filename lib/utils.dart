@@ -63,7 +63,6 @@ comprobarImagen(image){
 }
 
 class PuntuacioHandler {
-
   static Future<void> enviarPuntuacion(nombre, puntuacion) async{
     final data = await supabase.from('Puntuaciones').select('*').eq('nombre', nombre);
     if(data.isEmpty){
@@ -77,8 +76,6 @@ class PuntuacioHandler {
         await supabase.from('Puntuaciones').update({ 'puntuacion': puntuacion }).match({ 'nombre': nombre });
       }on Exception catch (e){
         print("Error: ${e}");
-      }catch (e){
-        print("Algo desconocido ocurrio ${e}");
       }
     }
   }
@@ -92,5 +89,4 @@ class PuntuacioHandler {
       return [];
     }
   }
-
 }
