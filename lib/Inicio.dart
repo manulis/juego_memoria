@@ -64,7 +64,7 @@ class _Inicio extends State<Inicio>{
                     );
                   }),
                   const SizedBox(height: 40),
-                  buildButton('Puntuación', () {
+                  buildButton('Puntuaciones', () {
                     Navigator.push(
                       context,
                       MaterialPageRoute(builder: (context) => Puntuaciones()),
