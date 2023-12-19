@@ -26,7 +26,6 @@ class NombreHandler {
 List images = [];
 List imagesCorrectas = [];
 
-
 Future<void> obtenerImagenes() async {
 
   //Obtención y guardado de las imagenes de la API
@@ -73,22 +72,26 @@ comprobarImagen(image){
 
 // Manejo de puntuaciones en la base de datos Supabase
 class PuntuacionHandler {
+
   // Enviar o actualizar la puntuación del jugador
-  static Future<void> enviarPuntuacion(nombre, puntuacion) async{
+  static Future<bool> enviarPuntuacion(nombre, puntuacion) async{
     final data = await supabase.from('Puntuaciones').select('*').eq('nombre', nombre);
     if(data.isEmpty){
       try{
         await supabase.from('Puntuaciones').insert({'nombre': nombre, 'puntuacion': puntuacion});     
       }on Exception catch(e){
         print("Error: ${e}");
+        return false;
       }
     }else{
       try{
         await supabase.from('Puntuaciones').update({ 'puntuacion': puntuacion }).match({ 'nombre': nombre });
       }on Exception catch (e){
         print("Error: ${e}");
+        return false;
       }
     }
+    return true;
   }
   //Obtener todas las puntuaciones de la base de datos
   static Future<List<Map<String, dynamic>>> obtenerPuntuacion() async {

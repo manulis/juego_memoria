@@ -40,7 +40,7 @@ class _Inicio extends State<Inicio>{
           backgroundColor: Colors.amber, 
           title: Titulos('Inicio'),
           centerTitle: true,
-          automaticallyImplyLeading: true,
+          automaticallyImplyLeading: false,
         ),
         SliverToBoxAdapter(
           child: Center(

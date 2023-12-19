@@ -113,7 +113,10 @@ class Resolucion extends StatefulWidget{
 int Puntuacion = 0;
 int fallos = 0;
 int aciertos = 0;
+bool enviarActivo = true;
 class _Resolucion extends State<Resolucion>{
+
+
 
   deleteimage(int i){
     return images[i] = '';
@@ -162,12 +165,27 @@ class _Resolucion extends State<Resolucion>{
                                   Text("Has tenido ${fallos} fallos y ${aciertos} aciertos"),
 
                               const SizedBox(height: 50),
-                              buildButton("Enviar Puntuación", () async { 
+
+                              enviarActivo ? buildButton("Enviar Puntuación", () async { 
+                                setState(() {
+                                  enviarActivo = false;
+                                });
                                 String nombre = await NombreHandler.obtenerNombreGuardado();
                                 Usuario usuario = Usuario(nombre, Puntuacion);
-                                await PuntuacionHandler.enviarPuntuacion(usuario.nombre, usuario.puntuacion);
-                              }),
+                                bool enviar;
+                                enviar = await PuntuacionHandler.enviarPuntuacion(usuario.nombre, usuario.puntuacion);
+                                setState(() {
+                                  enviarActivo = true;
+                                });
+                                if(enviar){
+                                  PopUp(context, 'Puntuacion Enviada', 'Puntuacion enviada correctamente');
+                                }else{
+                                  PopUp(context, 'Error', 'Parece que hubo un error al enviar la puntuación');
+                                } 
+                              }):Container(child: CircularProgressIndicator()),
+
                               const SizedBox(height: 30),
+                              
                               buildButton("Salir", () { 
                                 Puntuacion = 0;
                                 aciertos = 0;
