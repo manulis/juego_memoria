@@ -116,8 +116,6 @@ int aciertos = 0;
 bool enviarActivo = true;
 class _Resolucion extends State<Resolucion>{
 
-
-
   deleteimage(int i){
     return images[i] = '';
   }
@@ -161,8 +159,8 @@ class _Resolucion extends State<Resolucion>{
                                     ],
                                   ),
 
-                                if(fallos==3 && aciertos!=5 || fallos!=3 && aciertos==5 || fallos!=3 && aciertos!=5)
-                                  Text("Has tenido ${fallos} fallos y ${aciertos} aciertos"),
+                             
+                              Text("Has tenido ${fallos} fallos y ${aciertos} aciertos"),
 
                               const SizedBox(height: 50),
 
